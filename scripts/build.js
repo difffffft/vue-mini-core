@@ -9,22 +9,28 @@ const dirs = readdirSync(rootDir).filter((item) =>
   statSync(`${rootDir}/${item}`).isDirectory()
 );
 
+
 // 2.并行打包,
 
-const rollupBuild = async (target) => {
+/**
+ * 
+ * stdio: 子进程输出在父进程能看到
+ * @param {*} target 
+ */
+const build = async (target) => {
   await execa("rollup", ["-c", "--environment", `TARGET:${target}`],{ stdio: 'inherit' });
 };
 
-const runParaller = async (dirs, build) => {
+const runParallel = async (dirs, iteratorFn) => {
   const res = [];
   for (const dir of dirs) {
-    res.push(build(dir));
+    res.push(iteratorFn(dir));
   }
   return Promise.all(res);
 };
 
 const main = async () => {
-  await runParaller(dirs, rollupBuild);
+  await runParallel(dirs, build);
   console.log("打包成功");
 };
 
