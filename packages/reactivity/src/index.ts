@@ -1,1 +1,6 @@
-export default []
+export {
+    reactive,
+    shallowReactive,
+    readonly,
+    shallowReadonly,
+} from "./reactive"

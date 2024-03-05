@@ -1,1 +1,1 @@
-export default []
+export { makeMap } from './makeMap'
