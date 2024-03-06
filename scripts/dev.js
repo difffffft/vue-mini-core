@@ -18,7 +18,7 @@ const dirs = readdirSync(rootDir).filter((item) =>
  * @param {*} target 
  */
 const build = async (target) => {
-  await execa("rollup", ["-c", "--environment", `TARGET:${target}`],{ stdio: 'inherit' });
+  await execa("rollup", ["-cw", "--environment", `TARGET:${target}`],{ stdio: 'inherit' });
 };
 
 const runParallel = async (dirs, iteratorFn) => {
